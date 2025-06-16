@@ -1,0 +1,8 @@
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Release\net9.0-windows\publish\WorkflowLauncher.exe
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Release\net9.0-windows\publish\Assets\rocket.ico
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Release\net9.0-windows\publish\Profiles\Health Component Project.json
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Release\net9.0-windows\publish\WorkflowLauncher.dll
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Release\net9.0-windows\publish\WorkflowLauncher.deps.json
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Release\net9.0-windows\publish\WorkflowLauncher.runtimeconfig.json
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Release\net9.0-windows\publish\WorkflowLauncher.pdb
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Release\net9.0-windows\publish\Newtonsoft.Json.dll

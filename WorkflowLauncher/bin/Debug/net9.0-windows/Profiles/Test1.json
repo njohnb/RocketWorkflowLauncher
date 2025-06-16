@@ -1,0 +1,11 @@
+{
+  "ProfileName": "Test1",
+  "Items": [
+    {
+      "Name": "Youtube",
+      "PathOrURL": "www.youtube.com",
+      "Type": 1,
+      "Enabled": true
+    }
+  ]
+}

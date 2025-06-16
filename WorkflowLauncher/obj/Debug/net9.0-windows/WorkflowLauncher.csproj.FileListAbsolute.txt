@@ -1,0 +1,21 @@
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Debug\net9.0-windows\WorkflowLauncher.exe
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Debug\net9.0-windows\WorkflowLauncher.deps.json
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Debug\net9.0-windows\WorkflowLauncher.runtimeconfig.json
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Debug\net9.0-windows\WorkflowLauncher.dll
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Debug\net9.0-windows\WorkflowLauncher.pdb
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.csproj.AssemblyReference.cache
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.MainForm.resources
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.csproj.GenerateResource.cache
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.AssemblyInfoInputs.cache
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.AssemblyInfo.cs
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.csproj.CoreCompileInputs.cache
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\Workflow.1179C32C.Up2Date
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.dll
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\refint\WorkflowLauncher.dll
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.pdb
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\WorkflowLauncher.genruntimeconfig.cache
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net9.0-windows\ref\WorkflowLauncher.dll
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Debug\net9.0-windows\Assets\rocket.ico
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Debug\net9.0-windows\Profiles\Health Component Project.json

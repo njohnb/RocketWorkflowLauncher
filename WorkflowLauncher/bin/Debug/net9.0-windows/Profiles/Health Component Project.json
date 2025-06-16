@@ -1,0 +1,17 @@
+{
+  "ProfileName": "Health Component Project",
+  "Items": [
+    {
+      "Name": "ChatGPT",
+      "PathOrURL": "www.chatgpt.com",
+      "Type": 1,
+      "Enabled": true
+    },
+    {
+      "Name": "Project",
+      "PathOrURL": "C:\\Projects\\DamageSystem\\UE5_DamageSystem\\DamageSystem.uproject",
+      "Type": 0,
+      "Enabled": true
+    }
+  ]
+}
