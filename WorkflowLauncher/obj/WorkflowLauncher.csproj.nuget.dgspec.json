@@ -44,6 +44,22 @@
         "net9.0-windows7.0": {
           "targetAlias": "net9.0-windows",
           "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[10.0.0-preview.5.25277.114, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[10.0.0-preview.5.25277.114, )"
+            },
+            "Microsoft.Extensions.Configuration.UserSecrets": {
+              "target": "Package",
+              "version": "[10.0.0-preview.5.25277.114, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[10.0.0-preview.5.25277.114, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"

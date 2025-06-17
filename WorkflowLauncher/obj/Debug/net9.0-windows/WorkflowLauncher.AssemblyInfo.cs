@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("97e4b922-a3da-44ce-98e3-f623e3da3993")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("WorkflowLauncher")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e3b93d466a5b1266138112040e96c94c3d9495d")]
 [assembly: System.Reflection.AssemblyProductAttribute("WorkflowLauncher")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WorkflowLauncher")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
