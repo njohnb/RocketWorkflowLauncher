@@ -1,0 +1,107 @@
+# Ignore build results
+bin/
+obj/
+out/
+[Aa]rtifacts/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# VS Code settings
+.vscode/
+
+# Visual Studio settings
+.vs/
+*.csproj.user
+
+# Backup and temporary files
+*.log
+*.tmp
+*.bak
+*.old
+*.orig
+
+# NuGet
+*.nupkg
+packages/
+*.snupkg
+.nuget/
+project.lock.json
+project.assets.json
+PackageLock.json
+
+# Rider / JetBrains IDE
+.idea/
+*.sln.iml
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# DotCover
+*.dotCover
+
+# User secrets (local dev only)
+**/secrets.json
+*.secrets.json
+
+# Publish outputs (optional — remove if you want to track releases)
+publish/
+app.publish/
+*.application
+*.manifest
+
+# IIS Express
+.vs/
+*.iisexpress/
+
+# ASP.NET dev certs (if included for auth)
+*.pfx
+*.cer
+
+# Logs and crash dumps
+*.dmp
+*.log
+*.tlog
+*.vsp
+*.vspx
+*.coverage
+*.coveragexml
+
+# Others
+*.dbmdl
+*.dbproj.schemaview
+*.pdb
+*.cache
+*.pidb
+*.mdb
+
+# Windows thumbnail database
+Thumbs.db
+
+# Build results of common tools
+Generated_Code/
+
+# Rider settings
+.idea/
+*.sln.iml
+
+# Workflows and test results
+TestResult*/
+*.trx
+*.coverage
+*.testsettings
+
+# macOS
+.DS_Store
+
+# Windows
+desktop.ini
+
+# Security (custom: ignore any manually added secrets files)
+secrets.json
+appsettings.Development.json
