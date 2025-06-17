@@ -1,0 +1,91 @@
+# Build artifacts (recursive)
+**/bin/
+**/obj/
+**/out/
+**/artifacts/
+
+# User-specific files (e.g., solution config)
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# VS Code and Rider settings
+**/.vscode/
+**/.idea/
+**/*.sln.iml
+
+# Visual Studio settings
+**/.vs/
+**/*.csproj.user
+
+# NuGet
+**/*.nupkg
+**/*.snupkg
+**/packages/
+**/.nuget/
+**/project.lock.json
+**/project.assets.json
+**/PackageLock.json
+
+# Resharper
+**/_ReSharper*/
+**/*.[Rr]e[Ss]harper
+**/*.DotSettings.user
+
+# DotCover
+**/*.dotCover
+
+# Logs and temporary files
+**/*.log
+**/*.tmp
+**/*.bak
+**/*.old
+**/*.orig
+
+# User secrets
+**/secrets.json
+**/*.secrets.json
+**/local.settings.json
+
+# Publish outputs
+**/publish/
+**/app.publish/
+**/*.application
+**/*.manifest
+
+# IIS Express
+**/*.iisexpress/
+
+# Security certs
+**/*.pfx
+**/*.cer
+
+# Crash dumps, coverage, debug files
+**/*.dmp
+**/*.tlog
+**/*.vsp
+**/*.vspx
+**/*.coverage
+**/*.coveragexml
+**/TestResult*/
+**/*.trx
+**/*.testsettings
+
+# Debug symbols and caches
+**/*.pdb
+**/*.cache
+**/*.pidb
+**/*.mdb
+
+# SQL and EF files
+**/*.dbmdl
+**/*.dbproj.schemaview
+
+# Windows and macOS system files
+**/Thumbs.db
+**/.DS_Store
+**/desktop.ini
+
+# Miscellaneous IDE and tooling
+**/Generated_Code/
