@@ -6,7 +6,7 @@ namespace WorkflowLauncher;
 
 public partial class OpenAIForm : Form
 {
-    private static string apiKey = Program.AppSecrets.OpenAiKey;
+    private const string AzureFunctionUrl = "https://querygptkey.azurewebsites.net/api/QueryGPT?code=0gmu1BfzGOOYocFasbJdq0TzYv6kjETxnzaTaDmhfQ51AzFueMJSmw==";
     private static readonly string apiUrl = "https://api.openai.com/v1/chat/completions";
     public OpenAIForm()
     {
@@ -51,22 +51,27 @@ public partial class OpenAIForm : Form
             },
             temperature = 0.7
         };
+
+        var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
         using (var httpClient = new HttpClient())
         {
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
-            var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8,
-                "application/json");
-            var response = await httpClient.PostAsync(apiUrl, content);
-            var responseString = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
+            try
             {
-                JObject json = JObject.Parse(responseString);
-                return json["choices"]?[0]?["message"]?["content"]?.ToString()?.Trim() ?? "No response.";
+                var response = await httpClient.PostAsync(AzureFunctionUrl, content);
+                var responseString = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return $"Error: {response.StatusCode}\n{responseString}";
+                }
                 
+                var json = JObject.Parse(responseString);
+                var message = json["choices"]?[0]?["message"]?["content"]?.ToString()?.Trim();
+                return message ?? "No response from Azure Function.";
             }
-            else
+            catch (Exception ex)
             {
-                return $"Error: {response.StatusCode}\n{responseString}";
+                return $"Request to Azure Function failed: {ex.Message}";
             }
         }
     }

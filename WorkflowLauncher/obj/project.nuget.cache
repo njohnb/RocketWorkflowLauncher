@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZESGO4n7sxQ=",
+  "dgSpecHash": "+TIZfjklyoY=",
   "success": true,
   "projectFilePath": "C:\\Projects\\WorkflowLauncher\\WorkflowLauncher\\WorkflowLauncher\\WorkflowLauncher.csproj",
   "expectedPackageFiles": [
@@ -38,5 +38,15 @@
     "C:\\Users\\User\\.nuget\\packages\\system.text.encodings.web\\10.0.0-preview.5.25277.114\\system.text.encodings.web.10.0.0-preview.5.25277.114.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.text.json\\10.0.0-preview.5.25277.114\\system.text.json.10.0.0-preview.5.25277.114.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://pkgs.dev.azure.com/azure-public/vside/_packaging/azure-functions/nuget/v4/index.json.",
+      "projectPath": "C:\\Projects\\WorkflowLauncher\\WorkflowLauncher\\WorkflowLauncher\\WorkflowLauncher.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Projects\\WorkflowLauncher\\WorkflowLauncher\\WorkflowLauncher\\WorkflowLauncher.csproj",
+      "targetGraphs": []
+    }
+  ]
 }
