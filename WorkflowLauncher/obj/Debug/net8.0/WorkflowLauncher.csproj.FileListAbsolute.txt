@@ -1,8 +1,0 @@
-C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net8.0\WorkflowLauncher.csproj.AssemblyReference.cache
-C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net8.0\WorkflowLauncher.MainForm.resources
-C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net8.0\WorkflowLauncher.csproj.GenerateResource.cache
-C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net8.0\WorkflowLauncher.GeneratedMSBuildEditorConfig.editorconfig
-C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net8.0\WorkflowLauncher.AssemblyInfoInputs.cache
-C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net8.0\WorkflowLauncher.AssemblyInfo.cs
-C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net8.0\WorkflowLauncher.csproj.CoreCompileInputs.cache
-C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net8.0\WorkflowLauncher.sourcelink.json
