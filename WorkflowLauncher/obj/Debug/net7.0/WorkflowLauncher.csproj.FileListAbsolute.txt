@@ -1,0 +1,3 @@
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net7.0\WorkflowLauncher.csproj.AssemblyReference.cache
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net7.0\WorkflowLauncher.MainForm.resources
+C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\obj\Debug\net7.0\WorkflowLauncher.csproj.GenerateResource.cache
