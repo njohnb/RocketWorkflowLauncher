@@ -6,7 +6,7 @@ namespace WorkflowLauncher;
 
 public partial class OpenAIForm : Form
 {
-    private const string AzureFunctionUrl = "https://querygptkey.azurewebsites.net/api/QueryGPT?code=0gmu1BfzGOOYocFasbJdq0TzYv6kjETxnzaTaDmhfQ51AzFueMJSmw==";
+    private const string AzureFunctionBaseUrl = "https://querygptkey.azurewebsites.net/api/QueryGPT";
     private static readonly string apiUrl = "https://api.openai.com/v1/chat/completions";
     public OpenAIForm()
     {
@@ -57,7 +57,10 @@ public partial class OpenAIForm : Form
         {
             try
             {
-                var response = await httpClient.PostAsync(AzureFunctionUrl, content);
+                httpClient.DefaultRequestHeaders.Add("x-api-key", "0246813579");
+                
+                string azureFunctionUrl = AzureFunctionBaseUrl;// + "?code=" + key;
+                var response = await httpClient.PostAsync(azureFunctionUrl, content);
                 var responseString = await response.Content.ReadAsStringAsync();
 
                 if (!response.IsSuccessStatusCode)
