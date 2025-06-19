@@ -3,6 +3,12 @@ using System;
 
 public static class Launcher
 {
+    public static void LaunchProfileByName(string profileName)
+    {
+        var profile = WorkflowManager.LoadProfile(profileName);
+        foreach (var item in profile.Items)
+            Launch(item);
+    }
     public static void Launch(WorkflowItem item)
     {
         if (!item.Enabled) return;

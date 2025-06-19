@@ -42,6 +42,7 @@ partial class MainForm
         buttonSetDefaultProfile = new System.Windows.Forms.Button();
         notifyIcon1 = new System.Windows.Forms.NotifyIcon(components);
         contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+        buttonMakeShortcut = new System.Windows.Forms.Button();
         SuspendLayout();
         // 
         // comboBoxProfiles
@@ -68,7 +69,7 @@ partial class MainForm
         buttonRunAll.Name = "buttonRunAll";
         buttonRunAll.Size = new System.Drawing.Size(166, 23);
         buttonRunAll.TabIndex = 2;
-        buttonRunAll.Text = "Run All";
+        buttonRunAll.Text = "Run Profile";
         buttonRunAll.UseVisualStyleBackColor = true;
         buttonRunAll.Click += buttonRunAll_Click;
         // 
@@ -145,11 +146,22 @@ partial class MainForm
         contextMenuStrip1.Name = "contextMenuStrip1";
         contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
         // 
+        // buttonMakeShortcut
+        // 
+        buttonMakeShortcut.Location = new System.Drawing.Point(215, 13);
+        buttonMakeShortcut.Name = "buttonMakeShortcut";
+        buttonMakeShortcut.Size = new System.Drawing.Size(167, 23);
+        buttonMakeShortcut.TabIndex = 9;
+        buttonMakeShortcut.Text = "Make Desktop Shortcut";
+        buttonMakeShortcut.UseVisualStyleBackColor = true;
+        buttonMakeShortcut.Click += buttonMakeShortcut_Click;
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(509, 261);
+        Controls.Add(buttonMakeShortcut);
         Controls.Add(buttonSetDefaultProfile);
         Controls.Add(buttonDeleteProfile);
         Controls.Add(buttonDeleteItem);
@@ -167,6 +179,8 @@ partial class MainForm
         FormClosing += MainForm_Closing;
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Button buttonMakeShortcut;
 
     private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 

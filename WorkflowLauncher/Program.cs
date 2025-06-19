@@ -16,7 +16,7 @@ namespace WorkflowLauncher
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
@@ -32,6 +32,13 @@ namespace WorkflowLauncher
                 pipeThread.Start();
                 
                 ApplicationConfiguration.Initialize();
+
+                if (args.Length >= 2 && args[0] == "--profile")
+                {
+                    string profileName = args[1];
+                    Launcher.LaunchProfileByName(profileName);
+                }
+                
                 mainForm = new MainForm();
                 Application.Run(mainForm);
             }
@@ -46,8 +53,18 @@ namespace WorkflowLauncher
                         client.Connect(3000); // wait a second
                         using (StreamWriter writer = new StreamWriter(client))
                         {
-                            writer.WriteLine("SHOW");
-                            writer.Flush();
+                            if (args.Length >= 2 && args[0] == "--profile")
+                            {
+                                string profileName = args[1];
+                                Launcher.LaunchProfileByName(profileName);
+                            }
+                            else
+                            {
+                                writer.WriteLine("SHOW");
+                                writer.Flush();
+                            }
+                            
+                            
                         }
                     }
                 }

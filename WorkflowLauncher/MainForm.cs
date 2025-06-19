@@ -363,5 +363,14 @@ namespace WorkflowLauncher
                 ShowMainWindow();
             }
         }
+
+        private void buttonMakeShortcut_Click(object sender, EventArgs e)
+        {
+            string shortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                currentProfile.ProfileName + ".lnk");
+            string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WorkflowLauncher.exe");
+            string arguments = "--profile " + currentProfile.ProfileName;
+            ShortcutHelper.CreateShortcut(shortcutPath, exePath, arguments);
+        }
     }
 }
