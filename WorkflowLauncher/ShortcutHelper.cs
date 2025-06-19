@@ -16,6 +16,12 @@ public static class ShortcutHelper
         dynamic shortcut = shell.CreateShortcut(shortcutPath);
         
         shortcut.TargetPath = targetPath;
+        
+        string baseDir = AppContext.BaseDirectory;
+        string iconPath = Path.Combine(baseDir, "Assets", "rocket.ico");
+        if(File.Exists(iconPath))
+            shortcut.IconLocation = iconPath;
+        
         shortcut.Arguments = arguments;
         shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath);
         shortcut.WindowStyle = 1;
