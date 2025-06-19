@@ -14,7 +14,8 @@ public static class Launcher
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = item.PathOrURL,
-                    UseShellExecute = true,
+                    Arguments = item.Arguments,
+                    UseShellExecute = false,
                 });
                 break;
             case LaunchType.Folder:
@@ -34,6 +35,8 @@ public static class Launcher
             case LaunchType.Custom:
                 // extend this later
                 break;
+            default:
+                throw new InvalidOperationException($"Unsupported launch type: {item.Type}");
         }
     }
 }

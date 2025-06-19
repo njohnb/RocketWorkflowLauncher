@@ -48,6 +48,7 @@ namespace WorkflowLauncher
             {
                 Name = textBoxName.Text,
                 PathOrURL = textBoxPath.Text,
+                Arguments = textBoxArguments.Text,
                 Type = (LaunchType)comboBoxType.SelectedItem,
                 Enabled = checkBoxEnabled.Checked
             };
@@ -60,7 +61,5 @@ namespace WorkflowLauncher
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-        
     }
 }

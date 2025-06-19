@@ -41,6 +41,8 @@ partial class AddEditItemForm
         buttonOK = new System.Windows.Forms.Button();
         buttonCancel = new System.Windows.Forms.Button();
         buttonBrowse = new System.Windows.Forms.Button();
+        textBoxArguments = new System.Windows.Forms.TextBox();
+        label4 = new System.Windows.Forms.Label();
         SuspendLayout();
         // 
         // textBoxName
@@ -96,7 +98,7 @@ partial class AddEditItemForm
         // 
         checkBoxEnabled.Checked = true;
         checkBoxEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-        checkBoxEnabled.Location = new System.Drawing.Point(168, 137);
+        checkBoxEnabled.Location = new System.Drawing.Point(221, 180);
         checkBoxEnabled.Name = "checkBoxEnabled";
         checkBoxEnabled.Size = new System.Drawing.Size(104, 24);
         checkBoxEnabled.TabIndex = 6;
@@ -134,11 +136,28 @@ partial class AddEditItemForm
         buttonBrowse.UseVisualStyleBackColor = true;
         buttonBrowse.Click += buttonBrowse_Click;
         // 
+        // textBoxArguments
+        // 
+        textBoxArguments.Location = new System.Drawing.Point(149, 129);
+        textBoxArguments.Name = "textBoxArguments";
+        textBoxArguments.Size = new System.Drawing.Size(266, 23);
+        textBoxArguments.TabIndex = 10;
+        // 
+        // label4
+        // 
+        label4.Location = new System.Drawing.Point(43, 129);
+        label4.Name = "label4";
+        label4.Size = new System.Drawing.Size(100, 23);
+        label4.TabIndex = 11;
+        label4.Text = "Arguments";
+        // 
         // AddEditItemForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(555, 300);
+        Controls.Add(label4);
+        Controls.Add(textBoxArguments);
         Controls.Add(buttonBrowse);
         Controls.Add(buttonCancel);
         Controls.Add(buttonOK);
@@ -160,6 +179,9 @@ partial class AddEditItemForm
         ResumeLayout(false);
         PerformLayout();
     }
+
+    private System.Windows.Forms.TextBox textBoxArguments;
+    private System.Windows.Forms.Label label4;
 
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label label2;
