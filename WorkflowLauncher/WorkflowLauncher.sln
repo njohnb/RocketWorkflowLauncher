@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowLauncher", "WorkflowLauncher\WorkflowLauncher.csproj", "{B6B3F32F-375E-4A74-B83E-DAC135C57EB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowLauncher", "WorkflowLauncher.csproj", "{B6B3F32F-375E-4A74-B83E-DAC135C57EB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
