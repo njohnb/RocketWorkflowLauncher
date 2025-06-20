@@ -13,49 +13,16 @@ public static class Launcher
     {
         if (!item.Enabled) return;
 
-        switch (item.Type)
+        var processInfo = new ProcessStartInfo
         {
-            case LaunchType.Program:
-                if (item.Arguments.Length > 0)
-                {
-                    // launch program
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = item.PathOrURL,
-                        Arguments = item.Arguments,
-                        UseShellExecute = false,
-                    });
-                }
-                else
-                {
-                    // launch file
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = item.PathOrURL,
-                        UseShellExecute = true,
-                    });
-                }
-
-                break;
-            case LaunchType.Folder:
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = item.PathOrURL,
-                    UseShellExecute = true,
-                });
-                break;
-            case LaunchType.Website:
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = item.PathOrURL,
-                    UseShellExecute = true,
-                });
-                break;
-            case LaunchType.Custom:
-                // extend this later
-                break;
-            default:
-                throw new InvalidOperationException($"Unsupported launch type: {item.Type}");
+            FileName = item.PathOrURL,
+            UseShellExecute = true
+        };
+        if (item.Type == LaunchType.Program && item.PathOrURL.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+        {
+            processInfo.Arguments = item.Arguments;
         }
+        
+        Process.Start(processInfo);
     }
 }

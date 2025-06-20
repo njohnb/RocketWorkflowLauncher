@@ -21,9 +21,13 @@ public static class ShortcutHelper
         string iconPath = Path.Combine(baseDir, "Assets", "rocket.ico");
         if(File.Exists(iconPath))
             shortcut.IconLocation = iconPath;
-        
-        shortcut.Arguments = arguments;
-        shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath);
+
+        if (targetPath.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(arguments))
+        {
+            shortcut.Arguments = arguments;
+        }
+
+        shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath) ?? baseDir;
         shortcut.WindowStyle = 1;
         shortcut.Description = "WorkflowLauncher";
         shortcut.Save();

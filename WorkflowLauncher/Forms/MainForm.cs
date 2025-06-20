@@ -370,8 +370,8 @@ namespace WorkflowLauncher
         {
             string shortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 currentProfile.ProfileName + ".lnk");
-            string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WorkflowLauncher.exe");
-            string arguments = "--profile " + currentProfile.ProfileName;
+            string exePath = Application.ExecutablePath;
+            string arguments = $"--profile \"{currentProfile.ProfileName}\"";
             ShortcutHelper.CreateShortcut(shortcutPath, exePath, arguments);
         }
 
