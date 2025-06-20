@@ -89,3 +89,6 @@
 
 # Miscellaneous IDE and tooling
 **/Generated_Code/
+
+#User-specific
+**/Profiles/
