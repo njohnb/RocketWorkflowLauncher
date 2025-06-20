@@ -43,31 +43,33 @@ partial class MainForm
         notifyIcon1 = new System.Windows.Forms.NotifyIcon(components);
         contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
         buttonMakeShortcut = new System.Windows.Forms.Button();
+        checkBoxOnStartup = new System.Windows.Forms.CheckBox();
+        label1 = new System.Windows.Forms.Label();
         SuspendLayout();
         // 
         // comboBoxProfiles
         // 
         comboBoxProfiles.FormattingEnabled = true;
-        comboBoxProfiles.Location = new System.Drawing.Point(9, 13);
+        comboBoxProfiles.Location = new System.Drawing.Point(12, 28);
         comboBoxProfiles.Name = "comboBoxProfiles";
-        comboBoxProfiles.Size = new System.Drawing.Size(200, 23);
+        comboBoxProfiles.Size = new System.Drawing.Size(248, 33);
         comboBoxProfiles.TabIndex = 0;
         comboBoxProfiles.SelectedIndexChanged += comboBoxProfiles_SelectedIndexChanged;
         // 
         // listBoxItems
         // 
         listBoxItems.FormattingEnabled = true;
-        listBoxItems.Location = new System.Drawing.Point(9, 42);
+        listBoxItems.Location = new System.Drawing.Point(12, 94);
         listBoxItems.Name = "listBoxItems";
-        listBoxItems.Size = new System.Drawing.Size(300, 199);
+        listBoxItems.Size = new System.Drawing.Size(654, 179);
         listBoxItems.TabIndex = 1;
         listBoxItems.DoubleClick += listBoxItems_DoubleClick;
         // 
         // buttonRunAll
         // 
-        buttonRunAll.Location = new System.Drawing.Point(315, 42);
+        buttonRunAll.Location = new System.Drawing.Point(266, 10);
         buttonRunAll.Name = "buttonRunAll";
-        buttonRunAll.Size = new System.Drawing.Size(166, 23);
+        buttonRunAll.Size = new System.Drawing.Size(175, 35);
         buttonRunAll.TabIndex = 2;
         buttonRunAll.Text = "Run Profile";
         buttonRunAll.UseVisualStyleBackColor = true;
@@ -75,9 +77,9 @@ partial class MainForm
         // 
         // buttonAddItem
         // 
-        buttonAddItem.Location = new System.Drawing.Point(315, 71);
+        buttonAddItem.Location = new System.Drawing.Point(310, 284);
         buttonAddItem.Name = "buttonAddItem";
-        buttonAddItem.Size = new System.Drawing.Size(166, 23);
+        buttonAddItem.Size = new System.Drawing.Size(175, 35);
         buttonAddItem.TabIndex = 3;
         buttonAddItem.Text = "Add Item";
         buttonAddItem.UseVisualStyleBackColor = true;
@@ -85,9 +87,9 @@ partial class MainForm
         // 
         // buttonSaveProfile
         // 
-        buttonSaveProfile.Location = new System.Drawing.Point(315, 158);
+        buttonSaveProfile.Location = new System.Drawing.Point(462, 12);
         buttonSaveProfile.Name = "buttonSaveProfile";
-        buttonSaveProfile.Size = new System.Drawing.Size(166, 23);
+        buttonSaveProfile.Size = new System.Drawing.Size(175, 35);
         buttonSaveProfile.TabIndex = 4;
         buttonSaveProfile.Text = "Save Profile";
         buttonSaveProfile.UseVisualStyleBackColor = true;
@@ -95,9 +97,9 @@ partial class MainForm
         // 
         // buttonNewProfile
         // 
-        buttonNewProfile.Location = new System.Drawing.Point(315, 129);
+        buttonNewProfile.Location = new System.Drawing.Point(266, 51);
         buttonNewProfile.Name = "buttonNewProfile";
-        buttonNewProfile.Size = new System.Drawing.Size(166, 23);
+        buttonNewProfile.Size = new System.Drawing.Size(175, 35);
         buttonNewProfile.TabIndex = 5;
         buttonNewProfile.Text = "New Profile";
         buttonNewProfile.UseVisualStyleBackColor = true;
@@ -105,9 +107,9 @@ partial class MainForm
         // 
         // buttonDeleteItem
         // 
-        buttonDeleteItem.Location = new System.Drawing.Point(315, 100);
+        buttonDeleteItem.Location = new System.Drawing.Point(491, 284);
         buttonDeleteItem.Name = "buttonDeleteItem";
-        buttonDeleteItem.Size = new System.Drawing.Size(166, 23);
+        buttonDeleteItem.Size = new System.Drawing.Size(175, 35);
         buttonDeleteItem.TabIndex = 6;
         buttonDeleteItem.Text = "Delete Item";
         buttonDeleteItem.UseVisualStyleBackColor = true;
@@ -115,9 +117,9 @@ partial class MainForm
         // 
         // buttonDeleteProfile
         // 
-        buttonDeleteProfile.Location = new System.Drawing.Point(315, 187);
+        buttonDeleteProfile.Location = new System.Drawing.Point(462, 53);
         buttonDeleteProfile.Name = "buttonDeleteProfile";
-        buttonDeleteProfile.Size = new System.Drawing.Size(166, 23);
+        buttonDeleteProfile.Size = new System.Drawing.Size(175, 35);
         buttonDeleteProfile.TabIndex = 7;
         buttonDeleteProfile.Text = "Delete Profile";
         buttonDeleteProfile.UseVisualStyleBackColor = true;
@@ -125,11 +127,11 @@ partial class MainForm
         // 
         // buttonSetDefaultProfile
         // 
-        buttonSetDefaultProfile.Location = new System.Drawing.Point(315, 216);
+        buttonSetDefaultProfile.Location = new System.Drawing.Point(17, 279);
         buttonSetDefaultProfile.Name = "buttonSetDefaultProfile";
-        buttonSetDefaultProfile.Size = new System.Drawing.Size(166, 23);
+        buttonSetDefaultProfile.Size = new System.Drawing.Size(250, 40);
         buttonSetDefaultProfile.TabIndex = 8;
-        buttonSetDefaultProfile.Text = "Set as Default";
+        buttonSetDefaultProfile.Text = "Set Profile as Default";
         buttonSetDefaultProfile.UseVisualStyleBackColor = true;
         buttonSetDefaultProfile.Click += buttonSetDefaultProfile_Click;
         // 
@@ -143,24 +145,45 @@ partial class MainForm
         // 
         // contextMenuStrip1
         // 
+        contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
         contextMenuStrip1.Name = "contextMenuStrip1";
         contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
         // 
         // buttonMakeShortcut
         // 
-        buttonMakeShortcut.Location = new System.Drawing.Point(215, 13);
+        buttonMakeShortcut.Location = new System.Drawing.Point(17, 325);
         buttonMakeShortcut.Name = "buttonMakeShortcut";
-        buttonMakeShortcut.Size = new System.Drawing.Size(167, 23);
+        buttonMakeShortcut.Size = new System.Drawing.Size(250, 40);
         buttonMakeShortcut.TabIndex = 9;
         buttonMakeShortcut.Text = "Make Desktop Shortcut";
         buttonMakeShortcut.UseVisualStyleBackColor = true;
         buttonMakeShortcut.Click += buttonMakeShortcut_Click;
         // 
+        // checkBoxOnStartup
+        // 
+        checkBoxOnStartup.Location = new System.Drawing.Point(327, 345);
+        checkBoxOnStartup.Name = "checkBoxOnStartup";
+        checkBoxOnStartup.Size = new System.Drawing.Size(21, 20);
+        checkBoxOnStartup.TabIndex = 10;
+        checkBoxOnStartup.Text = "checkBox1";
+        checkBoxOnStartup.UseVisualStyleBackColor = true;
+        checkBoxOnStartup.Click += checkBox1_Click;
+        // 
+        // label1
+        // 
+        label1.Location = new System.Drawing.Point(354, 342);
+        label1.Name = "label1";
+        label1.Size = new System.Drawing.Size(312, 27);
+        label1.TabIndex = 11;
+        label1.Text = "Run profile on application startup";
+        // 
         // MainForm
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(509, 261);
+        ClientSize = new System.Drawing.Size(678, 394);
+        Controls.Add(label1);
+        Controls.Add(checkBoxOnStartup);
         Controls.Add(buttonMakeShortcut);
         Controls.Add(buttonSetDefaultProfile);
         Controls.Add(buttonDeleteProfile);
@@ -172,6 +195,7 @@ partial class MainForm
         Controls.Add(listBoxItems);
         Controls.Add(comboBoxProfiles);
         FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+        Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
         MaximizeBox = false;
         SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -179,6 +203,9 @@ partial class MainForm
         FormClosing += MainForm_Closing;
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.CheckBox checkBoxOnStartup;
+    private System.Windows.Forms.Label label1;
 
     private System.Windows.Forms.Button buttonMakeShortcut;
 

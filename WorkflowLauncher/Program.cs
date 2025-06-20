@@ -32,11 +32,20 @@ namespace WorkflowLauncher
                 pipeThread.Start();
                 
                 ApplicationConfiguration.Initialize();
-
+                
+                // check if launching profile from shortcut
                 if (args.Length >= 2 && args[0] == "--profile")
                 {
-                    string profileName = args[1];
-                    Launcher.LaunchProfileByName(profileName);
+                    Launcher.LaunchProfileByName(args[1]);
+                }
+                else
+                {
+                    WorkflowProfile startupProfile = WorkflowManager.GetStartupProfile();
+                    if (startupProfile != null)
+                    {
+                        // launch all items on app startup
+                        Launcher.LaunchProfileByName(startupProfile.ProfileName);
+                    }
                 }
                 
                 mainForm = new MainForm();

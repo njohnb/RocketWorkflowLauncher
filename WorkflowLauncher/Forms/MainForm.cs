@@ -95,6 +95,7 @@ namespace WorkflowLauncher
             var profileName = comboBoxProfiles.SelectedItem.ToString().Replace(" (default)", "");
             currentProfile = WorkflowManager.LoadProfile(profileName);
             RefreshItemList();
+            checkBoxOnStartup.Checked = currentProfile.bStartOnStartup;
         }
 
         private void buttonRunAll_Click(object sender, EventArgs e)
@@ -211,6 +212,7 @@ namespace WorkflowLauncher
                     comboBoxProfiles.SelectedIndex = nextIndex;
                     profileName = comboBoxProfiles.SelectedItem.ToString().Replace(" (default)", ""); 
                     currentProfile = WorkflowManager.LoadProfile(profileName);
+                    checkBoxOnStartup.Checked = currentProfile.bStartOnStartup;
                     RefreshItemList();
                 }
                 else
@@ -371,6 +373,21 @@ namespace WorkflowLauncher
             string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WorkflowLauncher.exe");
             string arguments = "--profile " + currentProfile.ProfileName;
             ShortcutHelper.CreateShortcut(shortcutPath, exePath, arguments);
+        }
+
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+            if (currentProfile == null) return;
+
+            foreach (var name in WorkflowManager.GetAvailableProfiles())
+            {
+                var profile = WorkflowManager.LoadProfile(name);
+                profile.bStartOnStartup = false;
+                WorkflowManager.SaveProfile(profile);
+            }
+
+            currentProfile.bStartOnStartup = checkBoxOnStartup.Checked;
+            WorkflowManager.SaveProfile(currentProfile);
         }
     }
 }

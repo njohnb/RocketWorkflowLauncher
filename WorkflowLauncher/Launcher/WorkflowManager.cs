@@ -56,4 +56,16 @@ public static class WorkflowManager
         var json = JsonConvert.SerializeObject(profile, Formatting.Indented);
         File.WriteAllText(path, json);
     }
+
+    public static WorkflowProfile GetStartupProfile()
+    {
+        foreach (var name in GetAvailableProfiles())
+        {
+            var profile = LoadProfile(name);
+            if (profile.bStartOnStartup)
+                return profile;
+        }
+
+        return null;
+    }
 }
