@@ -16,13 +16,26 @@ public static class Launcher
         switch (item.Type)
         {
             case LaunchType.Program:
-                // launch program
-                Process.Start(new ProcessStartInfo
+                if (item.Arguments.Length > 0)
                 {
-                    FileName = item.PathOrURL,
-                    Arguments = item.Arguments,
-                    UseShellExecute = false,
-                });
+                    // launch program
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = item.PathOrURL,
+                        Arguments = item.Arguments,
+                        UseShellExecute = false,
+                    });
+                }
+                else
+                {
+                    // launch file
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = item.PathOrURL,
+                        UseShellExecute = true,
+                    });
+                }
+
                 break;
             case LaunchType.Folder:
                 Process.Start(new ProcessStartInfo
