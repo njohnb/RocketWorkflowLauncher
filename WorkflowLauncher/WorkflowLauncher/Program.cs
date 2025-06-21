@@ -21,6 +21,20 @@ namespace WorkflowLauncher
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
 
+            // handle analyze logic separate so parallel AI windows can be open
+            if (args.Length >= 2 && args[0] == "--analyze")
+            {
+                string logPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    "RocketWorkflowLogs",
+                    "contextmenu.log");
+                File.AppendAllText(logPath, $"analyze attempted!!! {DateTime.Now}\n");
+
+                ApplicationConfiguration.Initialize();
+                Application.Run(new OpenAIForm(args[1]));
+                return;
+            }
+            
             bool createdNew = true;
             _mutex = new Mutex(true, "WorkflowLauncher_Mutex", out createdNew);
             if (createdNew)
