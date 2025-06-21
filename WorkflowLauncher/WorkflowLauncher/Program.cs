@@ -38,6 +38,12 @@ namespace WorkflowLauncher
                 {
                     Launcher.LaunchProfileByName(args[1]);
                 }
+                else if (args.Length >= 2 && args[0] == "--analyze")
+                {
+                    string targetPath = args[1];
+                    ApplicationConfiguration.Initialize();
+                    Application.Run(new OpenAIForm(targetPath));
+                }
                 else
                 {
                     WorkflowProfile startupProfile = WorkflowManager.GetStartupProfile();

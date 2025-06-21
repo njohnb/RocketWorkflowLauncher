@@ -9,7 +9,7 @@ namespace WorkflowLauncher
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public WorkflowItem Result { get; private set; }
 
-        public AddEditItemForm(WorkflowItem existingItem = null)
+        public AddEditItemForm(WorkflowItem? existingItem = null)
         {
             InitializeComponent();
             comboBoxType.DataSource = Enum.GetValues(typeof(LaunchType));

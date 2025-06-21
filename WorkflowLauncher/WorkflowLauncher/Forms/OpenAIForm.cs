@@ -13,7 +13,23 @@ public partial class OpenAIForm : Form
         InitializeComponent();
     }
 
-    private async Task<string> CallOpenAIAsync(string userInput)
+    public OpenAIForm(string targetPath = null)
+    {
+        InitializeComponent();
+        if (!string.IsNullOrEmpty(targetPath))
+        {
+            string prompt = $"Please analyze and summarize the contents of: \n\"{targetPath}\"";
+            StartAsyncCall(prompt);
+        }
+    }
+
+    private async void StartAsyncCall(string analysisPrompt)
+    {
+        string response = await CallOpenAIAsync(analysisPrompt, true);
+        textBoxResponse.Text = response;
+    }
+    
+    private async Task<string> CallOpenAIAsync(string userInput, bool bAnalyze = false)
     {
         var requestData = new
         {
@@ -86,7 +102,7 @@ public partial class OpenAIForm : Form
         string input = textBoxPrompt.Text.Trim();
         if (!string.IsNullOrEmpty(input))
         {
-            string response = await CallOpenAIAsync(input);
+            string response = await CallOpenAIAsync(input, false);
             textBoxResponse.Text = response;
         }
 
