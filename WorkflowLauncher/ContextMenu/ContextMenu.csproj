@@ -18,6 +18,5 @@
       <HintPath>..\packages\SharpShell.2.7.2\lib\net40\SharpShell.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Compile Include="OpenAIForm.cs"/>
   </ItemGroup>
 </Project>
