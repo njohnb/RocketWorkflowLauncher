@@ -18,12 +18,19 @@ namespace WorkflowContextMenu
         protected override ContextMenuStrip CreateMenu()
         {
             var menu = new ContextMenuStrip();
-            var menuItem = new ToolStripMenuItem()
+            var SendToAiAssistantButton = new ToolStripMenuItem()
             {
                 Text = "Send to AI Assistant"
             };
-            menuItem.Click += (s, e) => HandleClick(SelectedItemPaths);
-            menu.Items.Add(menuItem);
+            SendToAiAssistantButton.Click += (s, e) => HandleClick(SelectedItemPaths);
+            
+            menu.Items.Add(new ToolStripSeparator());
+            
+            menu.Items.Add(SendToAiAssistantButton);
+            
+            menu.Items.Add(new ToolStripSeparator());
+            
+            
             return menu;
         }
 

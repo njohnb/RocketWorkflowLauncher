@@ -6,10 +6,12 @@
         <Nullable>enable</Nullable>
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
+        <TargetPlatformVersion></TargetPlatformVersion>
         <UserSecretsId>WorkflowLauncherGuid</UserSecretsId>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <SupportedOSPlatformVersion>6.1</SupportedOSPlatformVersion>
         <EnableWindowsTargeting>true</EnableWindowsTargeting>
+        <NoWarn>$(NoWarn);CA1416</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>

@@ -8,7 +8,7 @@ namespace WorkflowLauncher.Shared
     {
         private static readonly string LogDirectory = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "WorkflowLauncherLogs");
+            "WorkflowLauncher");
 
         private static readonly string WorkflowLog = Path.Combine(LogDirectory, "launcher.log");
         private static readonly string ContextMenuLog = Path.Combine(LogDirectory, "contextmenu.log");

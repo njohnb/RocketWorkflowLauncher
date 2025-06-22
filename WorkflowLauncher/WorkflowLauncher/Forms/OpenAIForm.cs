@@ -9,7 +9,6 @@ namespace WorkflowLauncher;
 public partial class OpenAIForm : Form
 {
     private const string AzureFunctionBaseUrl = "https://querygptkey.azurewebsites.net/api/QueryGPT";
-    private static readonly string apiUrl = "https://api.openai.com/v1/chat/completions";
     public OpenAIForm()
     {
         InitializeComponent();
@@ -26,54 +25,80 @@ public partial class OpenAIForm : Form
     {
         if (string.IsNullOrEmpty(targetPath))
             return;
-        try
+
+        if (File.Exists(targetPath)) // targetPath is a file
         {
-            buttonSendPrompt.Enabled = false;
-            string fileContent = File.ReadAllText(targetPath);
-
-            const int maxTokens = 24_000;
-            const int maxChars = maxTokens * 4; // ~96,000 characters
-            int estimatedTokens = EstimateTokens(fileContent);
-
-            
-            Logger.LogContextMenu($"[{DateTime.Now}] Analyzing file: {targetPath}\n" +
-                                  $"- Char length: {fileContent.Length}\n" +
-                                  $"- Estimated tokens: {estimatedTokens} / {maxTokens}\n");
-            
-            if (estimatedTokens > maxTokens)
+            try
             {
-                try
+                buttonSendPrompt.Enabled = false;
+                string fileContent = File.ReadAllText(targetPath);
+
+                const int maxTokens = 24_000;
+                const int maxChars = maxTokens * 4; // ~96,000 characters
+                int estimatedTokens = EstimateTokens(fileContent);
+
+            
+                Logger.LogContextMenu($"[{DateTime.Now}] Analyzing file: {targetPath}\n" +
+                                      $"- Char length: {fileContent.Length}\n" +
+                                      $"- Estimated tokens: {estimatedTokens} / {maxTokens}\n");
+            
+                if (estimatedTokens > maxTokens)
                 {
-                    Logger.LogContextMenu($"[{DateTime.Now}] File is too large. Splitting into chunks.");
+                    try
+                    {
+                        Logger.LogContextMenu($"[{DateTime.Now}] File is too large. Splitting into chunks.");
                     
                     
-                    int chunkCharSize = maxChars / 2; // ~48,000 chars per chunk
-                    List<string> chunks = ChunkString(fileContent, chunkCharSize); // roughly 12,000 tokens per chunk
+                        int chunkCharSize = maxChars / 2; // ~48,000 chars per chunk
+                        List<string> chunks = ChunkString(fileContent, chunkCharSize); // roughly 12,000 tokens per chunk
                     
-                    await StartMultiChunkCall(chunks, targetPath);
+                        await StartMultiChunkCall(chunks, targetPath);
                     
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogContextMenu($"-----ChunkString() failed at {DateTime.Now} -- {ex.Message}\n{ex.StackTrace}-----");
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Logger.LogContextMenu($"-----ChunkString() failed at {DateTime.Now} -- {ex.Message}\n{ex.StackTrace}-----");
+                    textBoxPrompt.Text = $"Please analyze and summarize the contents of the following file: \n\"{targetPath}\"";
+                    textBoxResponse.Text = "Thinking...";
+                    string prompt = $"Please analyze and summarize the contents of the following file: \n\"{targetPath}\" \n\n{fileContent} \n\n{fileContent.Length}";
+                    await StartAsyncCall(prompt);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                string prompt =
-                    $"Please analyze and summarize the contents of the following file: \n\"{targetPath}\" \n\n{fileContent} \n\n{fileContent.Length}";
-                textBoxPrompt.Text = prompt;
+                Logger.LogContextMenu(ex, "-----OpenAIForm_Shown failed.-----");
+            }
+            finally
+            {
+                buttonSendPrompt.Enabled = true;
+            }
+        }
+        else if (Directory.Exists(targetPath)) // targetPath is a folder
+        {
+            try
+            {
+                // call folder scanner
+                buttonSendPrompt.Enabled = false;
+                var summary = FolderScanner.ScanFolder(targetPath);
+                string formatted = FolderScanner.FormatSummary(summary);
+                textBoxPrompt.Text = $"Please analyze and summarize the contents of the following folder: \n\"{targetPath}\"";
                 textBoxResponse.Text = "Thinking...";
+                string prompt = $"Please analyze and summarize the contents of the following folder: \n\"{targetPath}\" \n\n{formatted}";
+                // todo: ENSURE CHUNKS ARENT OVER SIZE LIMIT
                 await StartAsyncCall(prompt);
             }
-        }
-        catch (Exception ex)
-        {
-            Logger.LogContextMenu(ex, "-----OpenAIForm_Shown failed.-----");
-        }
-        finally
-        {
-            buttonSendPrompt.Enabled = true;
+            catch(Exception ex)
+            {
+                Logger.LogContextMenu(ex, "-----OpenAIForm_Shown failed.-----");
+            }
+            finally
+            {
+                buttonSendPrompt.Enabled = true;
+            }
         }
     }
     
