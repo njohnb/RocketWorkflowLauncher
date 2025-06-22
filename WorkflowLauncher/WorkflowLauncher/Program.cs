@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System.IO.Pipes;
 using System.Threading;
 using System.Windows.Forms;
+using WorkflowLauncher.Shared;
 
 namespace WorkflowLauncher
 {
@@ -24,6 +25,7 @@ namespace WorkflowLauncher
             // handle analyze logic separate so parallel AI windows can be open
             if (args.Length >= 2 && args[0] == "--analyze")
             {
+                Logger.LogContextMenu("===Starting analyze window===");
                 ApplicationConfiguration.Initialize();
                 Application.Run(new OpenAIForm(args[1]));
                 return;
@@ -33,6 +35,7 @@ namespace WorkflowLauncher
             _mutex = new Mutex(true, "WorkflowLauncher_Mutex", out createdNew);
             if (createdNew)
             {
+                Logger.LogWorkflow("=== Workflow Launcher Starter ===");
                 Thread pipeThread = new Thread(ListenForPipeMessages)
                 {
                     IsBackground = true

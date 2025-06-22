@@ -36,6 +36,7 @@
       <Compile Update="OpenAIForm.cs">
         <SubType>Form</SubType>
       </Compile>
+        <Compile Include="..\Shared\Logger.cs"/>
     </ItemGroup>
 
     <ItemGroup>

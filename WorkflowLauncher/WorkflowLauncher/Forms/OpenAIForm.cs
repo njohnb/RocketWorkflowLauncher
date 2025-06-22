@@ -2,6 +2,7 @@
 using System.Windows.Forms.VisualStyles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using WorkflowLauncher.Shared;
 
 namespace WorkflowLauncher;
 
@@ -34,34 +35,27 @@ public partial class OpenAIForm : Form
             const int maxChars = maxTokens * 4; // ~96,000 characters
             int estimatedTokens = EstimateTokens(fileContent);
 
-            ///////// DEBUGGING /////////
-            string logPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "RocketWorkflowLogs",
-                "contextmenu.log");
-            File.AppendAllText(logPath,
-                $"[{DateTime.Now}] Analyzing file: {targetPath}\n" +
-                $"- Char length: {fileContent.Length}\n" +
-                $"- Estimated tokens: {estimatedTokens} / {maxTokens}\n");
-            /////////////////////////////
-
+            
+            Logger.LogContextMenu($"[{DateTime.Now}] Analyzing file: {targetPath}\n" +
+                                  $"- Char length: {fileContent.Length}\n" +
+                                  $"- Estimated tokens: {estimatedTokens} / {maxTokens}\n");
+            
             if (estimatedTokens > maxTokens)
             {
                 try
                 {
-                    File.AppendAllText(logPath,
-                    $"----- Starting multi-chunk analysis, calling StartMultiChunkCall()");
+                    Logger.LogContextMenu($"[{DateTime.Now}] File is too large. Splitting into chunks.");
+                    
+                    
                     int chunkCharSize = maxChars / 2; // ~48,000 chars per chunk
                     List<string> chunks = ChunkString(fileContent, chunkCharSize); // roughly 12,000 tokens per chunk
                     
-                    File.AppendAllText(logPath, $"--> About to call StartMultiChunkCall() at {DateTime.Now}\n");
                     await StartMultiChunkCall(chunks, targetPath);
-                    File.AppendAllText(logPath, $"--> Successfully returned from StartMultiChunkCall() at {DateTime.Now}\n");
+                    
                 }
                 catch (Exception ex)
                 {
-                    File.AppendAllText(logPath,
-                        $"-----ChunkString() failed at {DateTime.Now} -- {ex.Message}\n{ex.StackTrace}");
+                    Logger.LogContextMenu($"-----ChunkString() failed at {DateTime.Now} -- {ex.Message}\n{ex.StackTrace}-----");
                 }
             }
             else
@@ -75,7 +69,7 @@ public partial class OpenAIForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error reading file at: {targetPath}\nException: {ex.Message}");
+            Logger.LogContextMenu(ex, "-----OpenAIForm_Shown failed.-----");
         }
         finally
         {
@@ -87,11 +81,7 @@ public partial class OpenAIForm : Form
     
     private List<string> ChunkString(string content, int chunkSize)
     {
-        string logPath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "RocketWorkflowLogs",
-            "contextmenu.log");
-        File.AppendAllText(logPath, $"ChunkString() called, total content length: {content.Length}, chunk size: {chunkSize}\n");
+        Logger.LogContextMenu($"ChunkString() called, total content length: {content.Length}, chunk size: {chunkSize}\n");
         
         List<string> chunks = new();
         int start = 0;
@@ -116,26 +106,14 @@ public partial class OpenAIForm : Form
 
             start = lastNewLine;
         }
-        
-        File.AppendAllText(logPath, $"Chunking complete. Number of chunks: {chunks.Count}\n");
+        Logger.LogContextMenu($"ChunkString() complete. Number of chunks: {chunks.Count}\n");
         return chunks;
     }
 
     private async Task StartMultiChunkCall(List<string> chunks, string targetPath)
     {
-        ///////// DEBUGGING /////////
-        string logPath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "RocketWorkflowLogs",
-            "contextmenu.log");
-
         try
         {
-
-            File.AppendAllText(logPath,
-                $"--------------STARTMULTICHUNKCALL ENTERED!");
-            /////////////////////////////
-
             buttonSendPrompt.Enabled = false;
             textBoxResponse.Text = "Analyzing large file in parts...";
 
@@ -146,8 +124,7 @@ public partial class OpenAIForm : Form
                     $"This is chunk {i + 1} of {chunks.Count} from file \"{targetPath}\":\n\n{chunks[i]}";
                 string response = await CallOpenAIAsync(chunkPrompt, true);
                 combinedSummary.AppendLine($"### Summary of chunk {i + 1}:\n{response}");
-                File.AppendAllText(logPath,
-                    $"------------Chunk #: {i + 1} of {chunks.Count}\n");
+                Logger.LogContextMenu($"------------Chunk #: {i + 1} of {chunks.Count}\n");
             }
 
             string finalPrompt =
@@ -157,8 +134,7 @@ public partial class OpenAIForm : Form
         }
         catch (Exception ex)
         {
-            File.AppendAllText(logPath,
-                $"Failure in StartMultiChunkCall at {DateTime.Now}: {ex.Message}\n{ex.StackTrace}");
+            Logger.LogContextMenu(ex, "-----StartMultiChunkCall failed.-----");
         }
         finally
         {
