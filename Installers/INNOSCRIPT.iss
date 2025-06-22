@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "WorkflowLauncher"
-#define MyAppVersion "1.2.2e"
+#define MyAppVersion "1.2.2f"
 #define MyAppPublisher "VogueRogue"
 #define MyAppURL "https://github.com/njohnb"
 #define MyAppExeName "WorkflowLauncher.exe"

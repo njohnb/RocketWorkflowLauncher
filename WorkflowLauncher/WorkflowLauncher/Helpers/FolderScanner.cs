@@ -14,37 +14,79 @@ namespace WorkflowLauncher
     }
     public static class FolderScanner
     {
-        public static FolderSummary ScanFolder(string rootPath)
+        public static FolderSummary ScanFolder(string rootPath, int maxDepth = 5, List<string>? excludedDirs = null)
         {
             var summary = new FolderSummary() { RootPath = rootPath };
-            var allFiles = Directory.EnumerateFiles(rootPath, "*.*", SearchOption.AllDirectories);
+            excludedDirs ??= new List<string> { "bin", "obj", ".git", ".vs", "node_modules", ".idea" };
 
-            foreach (var file in allFiles)
+            void Recurse(string path, int depth)
             {
+                if (depth > maxDepth) return;
+                
+                IEnumerable<string> files = Enumerable.Empty<string>();
                 try
                 {
-                    var fileInfo = new FileInfo(file);
-                    string ext = fileInfo.Extension.ToLowerInvariant();
-
-                    summary.TotalFiles++;
-                    summary.TotalSizeBytes += fileInfo.Length;
-
-                    if (!summary.FileTypeCounts.ContainsKey(ext))
-                        summary.FileTypeCounts[ext] = 0;
-                    summary.FileTypeCounts[ext]++;
-
-                    if (!summary.FileTypeSizes.ContainsKey(ext))
-                        summary.FileTypeSizes[ext] = 0;
-                    summary.FileTypeSizes[ext] += fileInfo.Length;
-
-                    summary.LargestFiles.Add((fileInfo.FullName, fileInfo.Length));
-
+                    files = Directory.EnumerateFiles(path, "*.*", SearchOption.TopDirectoryOnly);
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogWorkflow(ex, "=====Folder Scanner Failed=====");
+                    Logger.LogWorkflow(ex, $"=====Folder Scanner Failed=====\n====={path}=====");
+                }
+
+                foreach (var file in files)
+                {
+                    try
+                    {
+                        var fileInfo = new FileInfo(file);
+                        string ext = fileInfo.Extension.ToLowerInvariant();
+                        
+                        summary.TotalFiles++;
+                        summary.TotalSizeBytes += fileInfo.Length;
+                        
+                        if(!summary.FileTypeCounts.ContainsKey(ext))
+                            summary.FileTypeCounts[ext] = 0;
+                        summary.FileTypeCounts[ext]++;
+                        
+                        if(!summary.FileTypeSizes.ContainsKey(ext))
+                            summary.FileTypeSizes[ext] = 0;
+                        summary.FileTypeSizes[ext] += fileInfo.Length;
+                        
+                        summary.LargestFiles.Add((fileInfo.FullName, fileInfo.Length));
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogWorkflow(ex, $"=====Folder Scanner Failed=====\n====={file}=====");
+                    }
+                }
+                IEnumerable<string> subdirs = Enumerable.Empty<string>();
+                try
+                {
+                    subdirs = Directory.EnumerateDirectories(path);
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogWorkflow(ex, $"=====Folder Scanner Failed=====\n====={path}=====");
+                }
+
+                foreach (var dir in subdirs)
+                {
+                    try
+                    {
+                        string dirName = Path.GetFileName(dir);
+                        if (excludedDirs.Any(ex => string.Equals(ex, dirName, StringComparison.OrdinalIgnoreCase)))
+                            continue;
+                        
+                        Recurse(dir, depth + 1);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogWorkflow(ex, $"=====Folder Scanner Failed=====\n====={dir}=====");
+                    }
                 }
             }
+            
+            Recurse(rootPath, 0);
 
             summary.LargestFiles = summary.LargestFiles
                 .OrderByDescending(f => f.Size)
@@ -52,6 +94,7 @@ namespace WorkflowLauncher
                 .ToList();
 
             return summary;
+            
         }
 
         public static string FormatSummary(FolderSummary summary)

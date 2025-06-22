@@ -85,7 +85,7 @@ public partial class OpenAIForm : Form
                 buttonSendPrompt.Enabled = false;
                 var summary = FolderScanner.ScanFolder(targetPath);
                 string formatted = FolderScanner.FormatSummary(summary);
-                textBoxPrompt.Text = $"Please analyze and summarize the contents of the following folder: \n\"{targetPath}\"";
+                textBoxPrompt.Text = $"Please analyze and summarize the contents of the following folder: \n\"{targetPath}\" \n\n{formatted}";
                 textBoxResponse.Text = "Thinking...";
                 string prompt = $"Please analyze and summarize the contents of the following folder: \n\"{targetPath}\" \n\n{formatted}";
                 // todo: ENSURE CHUNKS ARENT OVER SIZE LIMIT
