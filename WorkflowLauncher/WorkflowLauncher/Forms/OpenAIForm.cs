@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Windows.Forms.VisualStyles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -12,40 +13,160 @@ public partial class OpenAIForm : Form
     {
         InitializeComponent();
     }
-
+    private string targetPath;
     public OpenAIForm(string targetPath = null)
     {
         InitializeComponent();
+        this.targetPath = targetPath;
+        Shown += OpenAIForm_Shown;
+    }
+
+    private async void OpenAIForm_Shown(object sender, EventArgs e)
+    {
+        if (string.IsNullOrEmpty(targetPath))
+            return;
+        try
+        {
+            buttonSendPrompt.Enabled = false;
+            string fileContent = File.ReadAllText(targetPath);
+
+            const int maxTokens = 24_000;
+            const int maxChars = maxTokens * 4; // ~96,000 characters
+            int estimatedTokens = EstimateTokens(fileContent);
+
+            ///////// DEBUGGING /////////
+            string logPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "RocketWorkflowLogs",
+                "contextmenu.log");
+            File.AppendAllText(logPath,
+                $"[{DateTime.Now}] Analyzing file: {targetPath}\n" +
+                $"- Char length: {fileContent.Length}\n" +
+                $"- Estimated tokens: {estimatedTokens} / {maxTokens}\n");
+            /////////////////////////////
+
+            if (estimatedTokens > maxTokens)
+            {
+                try
+                {
+                    File.AppendAllText(logPath,
+                    $"----- Starting multi-chunk analysis, calling StartMultiChunkCall()");
+                    int chunkCharSize = maxChars / 2; // ~48,000 chars per chunk
+                    List<string> chunks = ChunkString(fileContent, chunkCharSize); // roughly 12,000 tokens per chunk
+                    
+                    File.AppendAllText(logPath, $"--> About to call StartMultiChunkCall() at {DateTime.Now}\n");
+                    await StartMultiChunkCall(chunks, targetPath);
+                    File.AppendAllText(logPath, $"--> Successfully returned from StartMultiChunkCall() at {DateTime.Now}\n");
+                }
+                catch (Exception ex)
+                {
+                    File.AppendAllText(logPath,
+                        $"-----ChunkString() failed at {DateTime.Now} -- {ex.Message}\n{ex.StackTrace}");
+                }
+            }
+            else
+            {
+                string prompt =
+                    $"Please analyze and summarize the contents of the following file: \n\"{targetPath}\" \n\n{fileContent} \n\n{fileContent.Length}";
+                textBoxPrompt.Text = prompt;
+                textBoxResponse.Text = "Thinking...";
+                await StartAsyncCall(prompt);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error reading file at: {targetPath}\nException: {ex.Message}");
+        }
+        finally
+        {
+            buttonSendPrompt.Enabled = true;
+        }
+    }
+    
+    private int EstimateTokens(string text) => (int)(text.Length / 4.0);
+    
+    private List<string> ChunkString(string content, int chunkSize)
+    {
         string logPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "RocketWorkflowLogs",
             "contextmenu.log");
-        File.AppendAllText(logPath, $"OpenAIForm() called at {DateTime.Now}\n" +
-                                    $"Target Path: {targetPath}\n" +
-                                    $"File exists: {File.Exists(targetPath)}\n");
-        if (!string.IsNullOrEmpty(targetPath))
+        File.AppendAllText(logPath, $"ChunkString() called, total content length: {content.Length}, chunk size: {chunkSize}\n");
+        
+        List<string> chunks = new();
+        int start = 0;
+        while (start < content.Length)
         {
-            buttonSendPrompt.Enabled = false;
+            int length = Math.Min(chunkSize, content.Length - start);
 
-            string prompt;
-            try
+            int searchStart = start + length - 1;
+            if(searchStart >= content.Length)
+                searchStart = content.Length - 1;
+
+            int lastNewLine = content.LastIndexOf('\n', searchStart, length);
+
+            if (lastNewLine <= start || lastNewLine == -1)
             {
-                string fileContent = File.ReadAllText(targetPath);
-                prompt =
-                    $"Attempt 9000- Please analyze and summarize the contents of the following file: \n\"{targetPath}\" \n\n{fileContent}";
+                lastNewLine = start + length;
+                if(lastNewLine > content.Length)
+                    lastNewLine = content.Length;
             }
-            catch (Exception ex)
-            { 
-                prompt = $"Error reading file at: {targetPath}\nException: {ex.Message}";
-            }
+            int chunkLength = lastNewLine - start;
+            chunks.Add(content.Substring(start, chunkLength).Trim());
 
-            textBoxPrompt.Text = prompt;
-            textBoxResponse.Text = "Thinking...";
-            StartAsyncCall(prompt);
+            start = lastNewLine;
         }
+        
+        File.AppendAllText(logPath, $"Chunking complete. Number of chunks: {chunks.Count}\n");
+        return chunks;
     }
 
-    private async void StartAsyncCall(string analysisPrompt)
+    private async Task StartMultiChunkCall(List<string> chunks, string targetPath)
+    {
+        ///////// DEBUGGING /////////
+        string logPath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "RocketWorkflowLogs",
+            "contextmenu.log");
+
+        try
+        {
+
+            File.AppendAllText(logPath,
+                $"--------------STARTMULTICHUNKCALL ENTERED!");
+            /////////////////////////////
+
+            buttonSendPrompt.Enabled = false;
+            textBoxResponse.Text = "Analyzing large file in parts...";
+
+            StringBuilder combinedSummary = new();
+            for (int i = 0; i < chunks.Count; i++)
+            {
+                string chunkPrompt =
+                    $"This is chunk {i + 1} of {chunks.Count} from file \"{targetPath}\":\n\n{chunks[i]}";
+                string response = await CallOpenAIAsync(chunkPrompt, true);
+                combinedSummary.AppendLine($"### Summary of chunk {i + 1}:\n{response}");
+                File.AppendAllText(logPath,
+                    $"------------Chunk #: {i + 1} of {chunks.Count}\n");
+            }
+
+            string finalPrompt =
+                $"Please review the following chunk summaries of the file \"{Path.GetFileName(targetPath)}\" and provide a full consolidated analysis:\n\n{combinedSummary}";
+            string finalResponse = await CallOpenAIAsync(finalPrompt, true);
+            textBoxResponse.Text = finalResponse;
+        }
+        catch (Exception ex)
+        {
+            File.AppendAllText(logPath,
+                $"Failure in StartMultiChunkCall at {DateTime.Now}: {ex.Message}\n{ex.StackTrace}");
+        }
+        finally
+        {
+            buttonSendPrompt.Enabled = true;
+        }
+
+    }
+    private async Task StartAsyncCall(string analysisPrompt)
     {
         string response = await CallOpenAIAsync(analysisPrompt, true);
         textBoxResponse.Text = response;

@@ -24,12 +24,6 @@ namespace WorkflowLauncher
             // handle analyze logic separate so parallel AI windows can be open
             if (args.Length >= 2 && args[0] == "--analyze")
             {
-                string logPath = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    "RocketWorkflowLogs",
-                    "contextmenu.log");
-                File.AppendAllText(logPath, $"analyze attempted!!! {DateTime.Now}\n");
-
                 ApplicationConfiguration.Initialize();
                 Application.Run(new OpenAIForm(args[1]));
                 return;

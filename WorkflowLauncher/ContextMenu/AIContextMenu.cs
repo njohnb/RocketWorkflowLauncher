@@ -17,16 +17,6 @@ namespace WorkflowContextMenu
         protected override bool CanShowMenu() => SelectedItemPaths != null;
         protected override ContextMenuStrip CreateMenu()
         {
-            ///////////////////// DEBUGGING /////////////////////
-            string logPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "RocketWorkflowLogs",
-                "contextmenu.log");
-            Directory.CreateDirectory(Path.GetDirectoryName(logPath));
-            File.AppendAllText(logPath, $"CreateMenu called at {DateTime.Now}\n");
-            /////////////////////////////////////////////////////
-
-            
             var menu = new ContextMenuStrip();
             var menuItem = new ToolStripMenuItem()
             {
@@ -41,27 +31,10 @@ namespace WorkflowContextMenu
         {
             foreach (var path in paths)
             {
-                
-                ///////////////////// DEBUGGING /////////////////////
-                #if DEBUG
-                string exePath = @"C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\bin\Debug\net9.0-windows\WorkflowLauncher.exe"
-                #else
                 string exePath = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                     "WorkflowLauncher",
                     "WorkflowLauncher.exe");
-                #endif
-                
-                ///////////////////// DEBUGGING /////////////////////
-                string logPath = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    "RocketWorkflowLogs",
-                    "contextmenu.log");
-                Directory.CreateDirectory(Path.GetDirectoryName(logPath));
-                File.AppendAllText(logPath, $"HandleClick called at {DateTime.Now}\n" +
-                                            $"Sending {path} to {exePath}\n");
-                /////////////////////////////////////////////////////
-                /// 
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = exePath,
