@@ -21,11 +21,11 @@
       <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.0-preview.5.25277.114" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0-preview.5.25277.114" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <Content Include="C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\ContextMenu\bin\Release\net48\publish\ContextMenu.dll">
+        <Content Include="C:\Projects\WorkflowLauncher\WorkflowLauncher\ContextMenu\bin\Release\net48\publish\ContextMenu.dll">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Link>ContextMenu.dll</Link>
         </Content>
-        <None Include="C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\ContextMenu\bin\Release\net48\publish\SharpShell.dll">
+        <None Include="C:\Projects\WorkflowLauncher\WorkflowLauncher\ContextMenu\bin\Release\net48\publish\SharpShell.dll">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Link>SharpShell.dll</Link>
         </None>
