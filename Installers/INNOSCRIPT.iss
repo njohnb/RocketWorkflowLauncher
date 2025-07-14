@@ -2,16 +2,16 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "WorkflowLauncher"
-#define MyAppVersion "1.2.2m"
+#define MyAppVersion "1.2.2p"
 #define MyAppPublisher "VogueRogue"
 #define MyAppURL "https://github.com/njohnb"
 #define MyAppExeName "WorkflowLauncher.exe"
 #define MyAppAssocName MyAppName + " File"
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
-#define PublishDir "C://Projects//WorkflowLauncher//WorkflowLauncher//WorkflowLauncher//WorkflowLauncher//bin//Release//net9.0-windows//win-x64//publish"
-#define AssetsDir "C://Projects//WorkflowLauncher//WorkflowLauncher//WorkflowLauncher//Assets"
-#define InstallerAssetsDir "C://Projects//WorkflowLauncher//WorkflowLauncher//WorkflowLauncher//InstallerAssets"
+#define PublishDir "C://Projects//WorkflowLauncher//WorkflowLauncher//WorkflowLauncher//bin//Release//net9.0-windows//publish"
+#define AssetsDir "C://Projects//WorkflowLauncher//WorkflowLauncher//Assets"
+#define InstallerAssetsDir "C://Projects//WorkflowLauncher//WorkflowLauncher//InstallerAssets"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -39,9 +39,9 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 PrivilegesRequired=none
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=C:\Projects\WorkflowLauncher\WorkflowLauncher\Installers
+OutputDir=C:\Projects\WorkflowLauncher\Installers
 OutputBaseFilename=RocketWorkflowInstaller_UNTESTED
-SetupIconFile="C:\Projects\WorkflowLauncher\WorkflowLauncher\WorkflowLauncher\Assets\rocket.ico"
+SetupIconFile="C:\Projects\WorkflowLauncher\WorkflowLauncher\Assets\rocket.ico"
 SolidCompression=yes
 WizardStyle=modern
 
@@ -55,9 +55,9 @@ Name: "startup"; Description: "Start {#MyAppName} when Windows starts"; GroupDes
 [Files]
 Source: "{#AssetsDir}\rocket.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#PublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#InstallerAssetsDir}\ServerRegistrationManager.exe"; DestDir: "{app}"; Flags: ignoreversion uninsneveruninstall
-Source: "{#PublishDir}\SharpShell.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#PublishDir}\ContextMenu.dll"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "{#InstallerAssetsDir}\ServerRegistrationManager.exe"; DestDir: "{app}"; Flags: ignoreversion uninsneveruninstall
+; Source: "{#PublishDir}\SharpShell.dll"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "{#PublishDir}\ContextMenu.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
@@ -73,16 +73,16 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilen
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-Filename: "cmd.exe"; Parameters: "/c """"{app}\ServerRegistrationManager.exe"" install ""{app}\ContextMenu.dll"" -codebase -s > ""{app}\reg_log.txt"" 2>&1"""; StatusMsg: "Registering shell extension..."; Flags: runhidden
+;Filename: "cmd.exe"; Parameters: "/c """"{app}\ServerRegistrationManager.exe"" install ""{app}\ContextMenu.dll"" -codebase -s > ""{app}\reg_log.txt"" 2>&1"""; StatusMsg: "Registering shell extension..."; Flags: runhidden
 
-[UninstallRun]
-Filename: "cmd.exe"; Parameters: "/c """"{app}\ServerRegistrationManager.exe"" uninstall ""{app}\ContextMenu.dll"" -s > ""{app}\unregister_log.txt"" 2>&1"""; Flags: runhidden
+; [UninstallRun] 
+; Filename: "cmd.exe"; Parameters: "/c """"{app}\ServerRegistrationManager.exe"" uninstall ""{app}\ContextMenu.dll"" -s > ""{app}\unregister_log.txt"" 2>&1"""; Flags: runhidden
 
-[UninstallRun]
-Filename: "taskkill.exe"; Parameters: "/f /im explorer.exe"; Flags: runhidden
+; [UninstallRun]
+; Filename: "taskkill.exe"; Parameters: "/f /im explorer.exe"; Flags: runhidden
 
-[UninstallRun]
-Filename: "cmd.exe"; Parameters: "/c ping 127.0.0.1 -n 3 > nul && start explorer.exe"; Flags: runhidden
+; [UninstallRun]
+; Filename: "cmd.exe"; Parameters: "/c ping 127.0.0.1 -n 3 > nul && start explorer.exe"; Flags: runhidden
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}"

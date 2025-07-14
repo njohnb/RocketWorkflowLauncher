@@ -295,15 +295,6 @@ namespace WorkflowLauncher
             // open main window
             contextMenuStrip1.Items.Add(new ToolStripMenuItem("Open Launcher", null, (s, e) => ShowMainWindow()));
             
-            
-            /////////////////// MY VERSION ONLY, IF YOU'RE SEEING THIS I FUCKED UP /////////////////////////////////////
-
-            contextMenuStrip1.Items.Add(new ToolStripSeparator());
-            contextMenuStrip1.Items.Add(new ToolStripMenuItem("Idea to Outline Generator", null,
-                (s, e) => OpenAssistantWindow()));
-
-            /////////////////// MY VERSION ONLY, IF YOU'RE SEEING THIS I FUCKED UP /////////////////////////////////////
-            
             // exit
             contextMenuStrip1.Items.Add(new ToolStripMenuItem("Exit", null, (s, e) =>
             {
@@ -340,12 +331,6 @@ namespace WorkflowLauncher
             this.Show();
             this.WindowState = FormWindowState.Normal;
             this.BringToFront();
-        }
-
-        private void OpenAssistantWindow()
-        {
-            OpenAIForm formAI = new OpenAIForm();
-            formAI.Show();
         }
         
         private void MainForm_Closing(object sender, FormClosingEventArgs e)

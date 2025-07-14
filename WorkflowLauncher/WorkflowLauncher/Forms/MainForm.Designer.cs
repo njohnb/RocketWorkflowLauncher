@@ -52,7 +52,7 @@ partial class MainForm
         comboBoxProfiles.FormattingEnabled = true;
         comboBoxProfiles.Location = new System.Drawing.Point(12, 28);
         comboBoxProfiles.Name = "comboBoxProfiles";
-        comboBoxProfiles.Size = new System.Drawing.Size(248, 33);
+        comboBoxProfiles.Size = new System.Drawing.Size(248, 23);
         comboBoxProfiles.TabIndex = 0;
         comboBoxProfiles.SelectedIndexChanged += comboBoxProfiles_SelectedIndexChanged;
         // 
@@ -61,7 +61,7 @@ partial class MainForm
         listBoxItems.FormattingEnabled = true;
         listBoxItems.Location = new System.Drawing.Point(12, 94);
         listBoxItems.Name = "listBoxItems";
-        listBoxItems.Size = new System.Drawing.Size(654, 179);
+        listBoxItems.Size = new System.Drawing.Size(654, 169);
         listBoxItems.TabIndex = 1;
         listBoxItems.DoubleClick += listBoxItems_DoubleClick;
         // 
@@ -147,7 +147,7 @@ partial class MainForm
         // 
         contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
         contextMenuStrip1.Name = "contextMenuStrip1";
-        contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+        contextMenuStrip1.Size = new System.Drawing.Size(181, 26);
         // 
         // buttonMakeShortcut
         // 
@@ -179,7 +179,7 @@ partial class MainForm
         // 
         // MainForm
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(678, 394);
         Controls.Add(label1);
